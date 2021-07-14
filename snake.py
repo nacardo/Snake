@@ -7,9 +7,10 @@ class Snake(object):
         self.vel_x = 1
         self.vel_y = 0
         self.position = []
-        # self.position.extend([[self.x, self.y], [self.x - 20, self.y]])
-        self.position.extend(self.x, self.y)
+        self.position.extend([[self.x, self.y], [self.x - 20, self.y], [self.x - 40, self.y], [self.x - 60, self.y]])
+        self.temp_position = self.position.copy()
         self.image = pygame.image.load("assets/body.png")
+        self.head_image = pygame.image.load("assets/food.png")
         print(self.position)
     
     
@@ -44,14 +45,37 @@ class Snake(object):
 
     # update the snakes position based on current direction
     def update(self, game):
-        if self.vel_x == 1:
-            self.x += 20
-        elif self.vel_x == -1:
-            self.x -= 20
-        elif self.vel_y == 1:
-            self.y += 20
-        elif self.vel_y == -1:
-            self.y -= 20
+        i = len(self.position) - 1
+        while i >= 0:
+            print(i, self.position[i])
+            if i == 0:
+                if self.vel_x == 1:
+                    self.x += 20
+                    self.position[i][0] += 20
+                elif self.vel_x == -1:
+                    self.x -= 20
+                    self.position[i][0] -= 20
+                elif self.vel_y == 1:
+                    self.y += 20
+                    self.position[i][1] += 20
+                elif self.vel_y == -1:
+                    self.y -= 20
+                    self.position[i][1] -= 20
+            else:
+                if self.position[i-1][0] > self.position[i][0]:
+                    self.position[i][0] += 20
+                elif self.position[i-1][0] < self.position[i][0]:
+                    self.position[i][0] -= 20
+                elif self.position[i-1][1] > self.position[i][1]:
+                    self.position[i][1] += 20
+                elif self.position[i-1][1] < self.position[i][1]:
+                    self.position[i][1] -= 20
+            
+            if i == 0:
+                game.window.blit(self.head_image, (self.position[i][0], self.position[i][1]))
+            else:
+                game.window.blit(self.image, (self.position[i][0], self.position[i][1]))
 
-        game.window.blit(self.image, (self.x, self.y))
-        # print(f"vel_x: {self.vel_x}, vel_y: {self.vel_y}")
+            i -= 1
+
+        print("-"*16)
