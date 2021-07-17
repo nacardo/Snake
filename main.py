@@ -1,7 +1,7 @@
 import pygame
 from game import Game
 
-FPS = 3
+FPS = 5
 BLACK = [0, 0, 0]
 
 
@@ -29,7 +29,8 @@ while playing:
     game.window.fill(BLACK)
 
     food.show_food(game, food.x, food.y)
-    food.eat_food(game, snake)
+    if food.eat_food(game, snake):
+        snake.grow(game)
     events = snake.move(events)
     snake.update(game)
     pygame.display.update()

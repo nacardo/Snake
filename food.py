@@ -22,3 +22,4 @@ class Food(object):
     def eat_food(self, game, snake):
         if game.snake.x == self.x and game.snake.y == self.y:
             self.new_food(game, snake)
+            return True
