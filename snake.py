@@ -20,26 +20,20 @@ class Snake(object):
     # control the snakes body with keyboard input
     def move(self, events):
         for event in events:
-            # print("pressed")
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT and self.vel_x != 1:
                     self.vel_x = -1
                     self.vel_y = 0
-                    print('left')
                 elif event.key == pygame.K_RIGHT and self.vel_x != -1:
                     self.vel_x = 1
                     self.vel_y = 0
-                    print('right')
                 elif event.key == pygame.K_UP and self.vel_y != 1:
                     self.vel_x = 0
                     self.vel_y = -1
-                    print('up')
                     
                 elif event.key == pygame.K_DOWN and self.vel_y != -1:
                     self.vel_x = 0
                     self.vel_y = 1
-                    print('down')
-        # print(events)
         return events
 
     # add an additional body square to the snakes tail based on current tails position
@@ -51,6 +45,20 @@ class Snake(object):
     def get_snake(self):
         for i in range(len(self.position) - 1):
             print(i, self.position[i])
+
+    # check if the snake hits the wall
+    def is_dead(self, game):
+        # print(self.x, self.y)
+        if (self.x + 20 > game.game_width) or (self.x < 0):
+            return False
+        elif (self.y + 20 > game.game_height) or (self.y < 0):
+            return False
+
+        if len(self.position) > 2:
+            for pos in self.position[3:]:
+                if [self.x, self.y] == pos:
+                    return False
+        return True 
 
     # update the snakes position based on current direction
     def update(self, game):

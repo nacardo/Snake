@@ -32,7 +32,9 @@ while playing:
     if food.eat_food(game, snake):
         snake.grow(game)
     events = snake.move(events)
+    playing = snake.is_dead(game)
     snake.update(game)
+    
     pygame.display.update()
 
 
