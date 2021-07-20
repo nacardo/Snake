@@ -1,5 +1,3 @@
-
-import random
 import copy
 import pygame
 class Snake(object):
