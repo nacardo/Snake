@@ -9,12 +9,12 @@ class Food(object):
         self.food_image = pygame.image.load("assets/food.png")
 
     def new_food(self, game, snake):
-        self.x = random.randint(0, game.game_width // 20) * 20
-        self.y = random.randint(0, game.game_height // 30) * 20
+        self.x = random.randint(0, (game.game_width - 1) // 20) * 20
+        self.y = random.randint(0, (game.game_height - 1) // 20) * 20
         for pos in game.snake.position:
             if [self.x, self.y] == pos:
                 self.new_food(game, snake)
-                print("food in snake")
+        print(f"food: {[self.x, self.y]}")
 
 
     

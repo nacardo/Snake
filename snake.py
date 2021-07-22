@@ -97,7 +97,3 @@ class Snake(object):
 
             # increment place
             i -= 1
-
-        # print("-"*16)
-        # self.get_snake()
-        # print("-"*16)
