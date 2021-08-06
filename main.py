@@ -44,10 +44,10 @@ def game_loop():
         if current_time > next_move_time:
             events = snake.move(events)
             if events:
-                print("changing time")
+                # print("changing time")
                 next_move_time = current_time + move_delay
         else:
-            print(p_num, "- cant move")
+            # print(p_num, "- cant move")
             p_num += 1
 
         playing = snake.is_dead(game)
